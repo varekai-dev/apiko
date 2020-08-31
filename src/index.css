@@ -26,5 +26,15 @@ code {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 75%;
+  width: 100%;
+  padding-top: 10px;
+}
+.toDoList {
+  display: flex;
+  width: 80%;
+  flex-direction: column;
+}
+.toDoItem svg {
+  height: 30px;
+  cursor: pointer;
 }
