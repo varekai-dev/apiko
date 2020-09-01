@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import T from 'prop-types'
 
-function ToDoInput({ onAdd }) {
-  const [value, setInputValue] = useState('')
+export function ToDoInput({ onAdd, initialValue }) {
+  const textInput = useRef()
+  const [value, setInputValue] = useState(initialValue)
   const onChange = (e) => {
     setInputValue(e.target.value)
   }
@@ -12,14 +13,21 @@ function ToDoInput({ onAdd }) {
     onAdd(value)
     setInputValue('')
   }
+  useEffect(() => {
+    textInput.current.focus()
+  }, [])
   return (
     <form onSubmit={onSubmit}>
-      <input {...{ value }} onChange={onChange} />
+      <input {...{ value }} ref={textInput} onChange={onChange} />
     </form>
   )
 }
 
-ToDoInput.propTyoes = {
-  onAdd: T.func.isRequired
+ToDoInput.propTypes = {
+  onAdd: T.func.isRequired,
+  initialValue: T.string
 }
-export default ToDoInput
+
+ToDoInput.defaultProps = {
+  initialValue: ''
+}

@@ -2,20 +2,17 @@ import React from 'react'
 import { toDoListPropTypes } from './propTypes'
 import Checkbox from './Checkbox'
 import Icon from './Icon'
-import Text from './Text'
 import T from 'prop-types'
 import './index.css'
+import { ToDoText } from './ToDoText'
 import withCheckedStyles from './withCheckedStyles'
 
-const ToDoItem = withCheckedStyles(({ todo, onSwitch, onRemove, additionalStyles }) => {
+const ToDoItem = withCheckedStyles(({ todo, onSwitch, onRemove, additionalStyles, onEdit }) => {
   return (
     !!todo && (
       <div className="toDoItem">
         <Checkbox {...{ todo, onSwitch }} />
-
-        <Text size={14} {...additionalStyles}>
-          {todo.text}
-        </Text>
+        <ToDoText {...{ todo, additionalStyles, onEdit }} />
         <Icon name="remove" onClick={() => onRemove(todo._id)} />
       </div>
     )
